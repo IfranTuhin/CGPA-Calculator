@@ -1,5 +1,6 @@
 import 'package:cgpa_calculator/Screen/cgpa_screen.dart';
 import 'package:cgpa_calculator/Screen/home_screen.dart';
+import 'package:cgpa_calculator/Screen/splash_screen.dart';
 import 'package:cgpa_calculator/provider/calculater_cgpa.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CgpaScreen(),
+      home: SplashScreen(),
     );
   }
 }

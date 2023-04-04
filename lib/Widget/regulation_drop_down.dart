@@ -1,58 +1,44 @@
+import 'package:cgpa_calculator/provider/calculater_cgpa.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+class RegulationDropdown extends StatefulWidget {
+  const RegulationDropdown({Key? key}) : super(key: key);
+  @override
+  State<RegulationDropdown> createState() => _RegulationDropdown();
+}
+class _RegulationDropdown extends State<RegulationDropdown> {
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
-
-void main() => runApp(const DropdownButtonApp());
-
-class DropdownButtonApp extends StatelessWidget {
-  const DropdownButtonApp({super.key});
+  String currentValue = '1';
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('DropdownButton Sample')),
-        body: const Center(
-          child: DropdownButtonExample(),
+
+    var data = Provider.of<CalculateCgpa>(context);
+
+    return DropdownButton(
+      value: currentValue,
+      items: [
+        DropdownMenuItem(
+          child: Text('Regulation 2010',style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400,color: Colors.indigo,),),
+          value: '1',
         ),
-      ),
-    );
-  }
-}
-
-class DropdownButtonExample extends StatefulWidget {
-  const DropdownButtonExample({super.key});
-
-  @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
-}
-
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String dropdownValue = list.first;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
+        DropdownMenuItem(
+          child: Text('Regulation 2016', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400,color: Colors.indigo,),),
+          value: '2',
+        ),
+        DropdownMenuItem(
+          child: Text('Regulation 2022', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400,color: Colors.indigo,),),
+          value: '3',
+        ),
+      ],
       onChanged: (String? value) {
-        // This is called when the user selects an item.
         setState(() {
-          dropdownValue = value!;
+          currentValue = value!;
+          print("Value ------ $currentValue");
+          data.regulationValue = currentValue;
         });
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
     );
   }
 }

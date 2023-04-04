@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 class CalculateCgpa extends ChangeNotifier{
 
-   double ? finalResult;
+  String regulationValue = '1';
+
+  double ? finalResult;
+
 
   void getData(String s1, String s2, String s3, String s4, String s5, String s6, String s7, String s8,){
 
@@ -16,7 +19,16 @@ class CalculateCgpa extends ChangeNotifier{
     double semester_7 = double.parse(s7);
     double semester_8 = double.parse(s8);
 
-    finalResult = (semester_1 * 0.05) + (semester_2 * 0.05) + (semester_3 * 0.05) + (semester_4 * 0.1) + (semester_5 * 0.15) + (semester_6*0.2) + (semester_7*0.25) + (semester_8*0.15);
+    if(regulationValue == "1"){
+      finalResult = (semester_1 * 0.05) + (semester_2 * 0.05) + (semester_3 * 0.05) + (semester_4 * 0.15) + (semester_5 * 0.15) + (semester_6*0.2) + (semester_7*0.25) + (semester_8*0.1);
+    }
+    else if(regulationValue == "2"){
+      finalResult = (semester_1 * 0.05) + (semester_2 * 0.05) + (semester_3 * 0.05) + (semester_4 * 0.1) + (semester_5 * 0.15) + (semester_6*0.2) + (semester_7*0.25) + (semester_8*0.15);
+    }
+    else if(regulationValue == "3"){
+      finalResult = (semester_1 * 0.05) + (semester_2 * 0.05) + (semester_3 * 0.1) + (semester_4 * 0.1) + (semester_5 * 0.2) + (semester_6*0.2) + (semester_7*0.2) + (semester_8*0.1);
+    }
+
 
   }
 

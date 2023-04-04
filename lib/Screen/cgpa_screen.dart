@@ -22,21 +22,7 @@ class _CgpaScreenState extends State<CgpaScreen> {
   TextEditingController sevenSemesterController = TextEditingController();
   TextEditingController eightSemesterController = TextEditingController();
 
-  // ----> Regulation drop down menu item <----
-  List regulationDropDownList = [
-    {'title': 'Regulation 2010', 'value': '2010'},
-    {'title': 'Regulation 2016', 'value': '2016'},
-    {'title': 'Regulation 2022', 'value': '2022'},
-  ];
 
-  // List dropDownListData = [
-  //   {"title": "BCA", "value": "1"},
-  //   {"title": "MCA", "value": "2"},
-  //   {"title": "B.Tech", "value": "3"},
-  //   {"title": "M.Tech", "value": "4"},
-  // ];
-
-  String defaultValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +30,14 @@ class _CgpaScreenState extends State<CgpaScreen> {
     // provider
     final data = Provider.of<CalculateCgpa>(context);
 
+
     // Global key for form validation
     final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Regulation 2016'),
-        backgroundColor: Colors.deepPurple,
+        title: const Text('CGPA Calculator'),
+        backgroundColor: Colors.indigo,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -59,7 +46,25 @@ class _CgpaScreenState extends State<CgpaScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 30,
+                height: 20,
+              ),
+
+              // which semester d
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Text(
+                  "Which regulation CGPA do you want know?" ,
+                  textAlign:TextAlign.center ,
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.indigo,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 10,
               ),
 
               //----> Select regulation Text <----
@@ -67,29 +72,15 @@ class _CgpaScreenState extends State<CgpaScreen> {
                 'Please select your Regulation : ',
                 style: TextStyle(
                   fontSize: 22,
-                  // fontWeight: FontWeight.bold,
+                  color: Colors.indigo,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
 
               // ----> Regulation Drop down menu <----
               Column(
                 children: [
-                  DropdownButton<String>(
-                    value: defaultValue,
-                    // isExpanded: true,
-                    menuMaxHeight: 100,
-                    items: regulationDropDownList.map<DropdownMenuItem<String>>((e) {
-                        return DropdownMenuItem(
-                            child: Text(e['title']), value: e['value']);
-                      }).toList(),
-
-                    onChanged: (value) {
-                      print('current value -- ${value}');
-                      setState(() {
-                        defaultValue = value!;
-                      });
-                    },
-                  ),
+                  RegulationDropdown(),
                 ],
               ),
 
@@ -99,14 +90,15 @@ class _CgpaScreenState extends State<CgpaScreen> {
 
               // text Input your semester point
               const Text(
-                'Input your semester point.',
+                'Input your semester point',
                 style: TextStyle(
                   fontSize: 22,
-                  // fontWeight: FontWeight.bold,
+                  color: Colors.indigo,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
 
               /*
@@ -135,8 +127,8 @@ class _CgpaScreenState extends State<CgpaScreen> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
-                              hintText: '1nd Semester',
-                              label: Text('1nd Semester'),
+                              hintText: '1st Semester',
+                              label: Text('1st Semester'),
                               border: OutlineInputBorder(),
                             ),
                           ),
@@ -354,7 +346,7 @@ class _CgpaScreenState extends State<CgpaScreen> {
                       sevenSemesterController.clear();
                       eightSemesterController.clear();
                     },
-                    style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
+                    style: ElevatedButton.styleFrom(primary: Colors.indigo),
                     child: const Text(
                       'Clear Field',
                       style: TextStyle(
@@ -363,7 +355,7 @@ class _CgpaScreenState extends State<CgpaScreen> {
                     ),
                   ),
                   const SizedBox(
-                    width: 20,
+                    width: 40,
                   ),
                   // Calculate button
                   ElevatedButton(
@@ -386,19 +378,9 @@ class _CgpaScreenState extends State<CgpaScreen> {
                             builder: (context) => const ShowCgpaResult(),
                           ),
                         );
-
-                        // Clear text field
-                        firstSemesterController.clear();
-                        secondSemesterController.clear();
-                        threeSemesterController.clear();
-                        fourSemesterController.clear();
-                        fiveSemesterController.clear();
-                        sixSemesterController.clear();
-                        sevenSemesterController.clear();
-                        eightSemesterController.clear();
                       }
                     },
-                    style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
+                    style: ElevatedButton.styleFrom(primary: Colors.indigo),
                     child: const Text(
                       'Calculate',
                       style: TextStyle(fontSize: 20),
